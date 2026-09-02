@@ -38,18 +38,6 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
 
         <!-- Right Action Controls -->
         <div class="nav-actions">
-          <!-- Theme Switcher -->
-          <button 
-            class="action-btn theme-btn" 
-            (click)="themeService.toggleTheme()" 
-            [attr.aria-label]="'Switch to ' + (themeService.currentTheme() === 'dark' ? 'light' : 'dark') + ' mode'">
-            @if (themeService.currentTheme() === 'dark') {
-              <app-icon name="sun" [size]="18"></app-icon>
-            } @else {
-              <app-icon name="moon" [size]="18"></app-icon>
-            }
-          </button>
-
           <!-- Resume Button -->
           <a class="btn btn-outline resume-btn" (click)="openResume()">
             <app-icon name="file-text" [size]="16"></app-icon>

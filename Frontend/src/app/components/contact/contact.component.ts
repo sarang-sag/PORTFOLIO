@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SectionHeaderComponent } from '../../shared/components/section-header/section-header.component';
 import { IconComponent } from '../../shared/components/icon/icon.component';
+import { EmailService } from '../../core/services/email.service';
 
 @Component({
   selector: 'app-contact',
@@ -26,17 +27,17 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
             </p>
 
             <div class="contact-methods">
-              <a href="mailto:sarangv.dev@gmail.com" class="method-item">
+              <a href="mailto:sarangsag86@gmail.com" class="method-item">
                 <div class="method-icon cyan">
                   <app-icon name="mail" [size]="20"></app-icon>
                 </div>
                 <div class="method-details">
                   <span class="method-label">Email Me</span>
-                  <span class="method-value">sarangv.dev&#64;gmail.com</span>
+                  <span class="method-value">sarangsag86&#64;gmail.com</span>
                 </div>
               </a>
 
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="method-item">
+              <a href="https://www.linkedin.com/in/sarang-v/" target="_blank" rel="noopener noreferrer" class="method-item">
                 <div class="method-icon blue">
                   <app-icon name="linkedin" [size]="20"></app-icon>
                 </div>
@@ -46,7 +47,7 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
                 </div>
               </a>
 
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="method-item">
+              <a href="https://github.com/sarang-sag" target="_blank" rel="noopener noreferrer" class="method-item">
                 <div class="method-icon purple">
                   <app-icon name="github" [size]="20"></app-icon>
                 </div>
@@ -71,11 +72,18 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
                   <app-icon name="check" [size]="32"></app-icon>
                 </div>
                 <h3>Message Sent Successfully!</h3>
-                <p>Thank you for reaching out, Sarang V will get back to you shortly.</p>
+                <p>Thank you for reaching out! A confirmation & thank-you email has been dispatched to your inbox. Sarang V will get back to you as soon as possible.</p>
                 <button class="btn btn-outline" (click)="resetForm()">Send Another Message</button>
               </div>
             } @else {
               <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+                @if (errorMessage()) {
+                  <div class="error-banner">
+                    <app-icon name="x" [size]="18"></app-icon>
+                    <span>{{ errorMessage() }}</span>
+                  </div>
+                }
+
                 <div class="form-row">
                   <!-- Name Field -->
                   <div class="form-group">
@@ -278,6 +286,18 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
       gap: 1.25rem;
     }
 
+    .error-banner {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.1rem;
+      border-radius: 10px;
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      color: #f43f5e;
+      font-size: 0.9rem;
+    }
+
     .form-row {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -375,9 +395,11 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
 })
 export class ContactComponent {
   private fb = inject(FormBuilder);
+  private emailService = inject(EmailService);
 
   public isSubmitting = signal<boolean>(false);
   public submittedSuccess = signal<boolean>(false);
+  public errorMessage = signal<string | null>(null);
 
   public contactForm: FormGroup = this.fb.group({
     name: ['', [Validators.required]],
@@ -398,16 +420,29 @@ export class ContactComponent {
     }
 
     this.isSubmitting.set(true);
+    this.errorMessage.set(null);
 
-    // Simulate API submission
-    setTimeout(() => {
-      this.isSubmitting.set(false);
-      this.submittedSuccess.set(true);
-    }, 800);
+    this.emailService.sendEmail(this.contactForm.value).subscribe({
+      next: (res) => {
+        this.isSubmitting.set(false);
+        if (res.success) {
+          this.submittedSuccess.set(true);
+        } else {
+          this.errorMessage.set(res.error || 'Failed to send message. Please try again.');
+        }
+      },
+      error: (err) => {
+        this.isSubmitting.set(false);
+        this.errorMessage.set('Could not send message to the backend server. Please verify the server is running or try again later.');
+        console.error('Email submission error:', err);
+      }
+    });
   }
 
   public resetForm(): void {
     this.contactForm.reset();
     this.submittedSuccess.set(false);
+    this.errorMessage.set(null);
   }
 }
+
