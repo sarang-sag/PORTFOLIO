@@ -28,14 +28,17 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
 
         <div class="footer-right">
           <div class="footer-socials">
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/sarang-v/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
               <app-icon name="linkedin" [size]="18"></app-icon>
             </a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
+            <a href="https://github.com/sarang-sag?tab=repositories" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
               <app-icon name="github" [size]="18"></app-icon>
             </a>
-            <a href="mailto:sarangv.dev@gmail.com" class="social-btn" aria-label="Email">
+            <a href="mailto:sarangsag86@gmail.com" class="social-btn" aria-label="Email">
               <app-icon name="mail" [size]="18"></app-icon>
+            </a>
+            <a href="Sarang_V_Resume.pdf.pdf" download="Sarang_V_Resume.pdf" target="_blank" class="social-btn" aria-label="Download Resume" title="Download Resume (PDF)">
+              <app-icon name="download" [size]="18"></app-icon>
             </a>
           </div>
 

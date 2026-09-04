@@ -39,8 +39,8 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
         <!-- Right Action Controls -->
         <div class="nav-actions">
           <!-- Resume Button -->
-          <a class="btn btn-outline resume-btn" (click)="openResume()">
-            <app-icon name="file-text" [size]="16"></app-icon>
+          <a class="btn btn-outline resume-btn" href="Sarang_V_Resume.pdf.pdf" download="Sarang_V_Resume.pdf" target="_blank">
+            <app-icon name="download" [size]="16"></app-icon>
             <span>Resume</span>
           </a>
 
@@ -64,26 +64,28 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
         <div class="mobile-drawer-content">
           <div class="drawer-header">
             <span class="logo-name">Sarang V</span>
-            <button class="action-btn" (click)="closeMobileMenu()">
+            <button class="action-btn" (click)="closeMobileMenu()" aria-label="Close menu">
               <app-icon name="x" [size]="20"></app-icon>
             </button>
           </div>
 
-          <nav class="mobile-nav-list">
-            @for (link of navLinks; track link.id) {
-              <a 
-                class="mobile-nav-link" 
-                [class.active]="scrollSpy.activeSection() === link.id"
-                (click)="navigateToMobile(link.id)">
-                <span class="nav-num">0{{ $index + 1 }}.</span>
-                <span class="nav-label">{{ link.label }}</span>
-              </a>
-            }
-          </nav>
+          <div class="drawer-body">
+            <nav class="mobile-nav-list">
+              @for (link of navLinks; track link.id) {
+                <a 
+                  class="mobile-nav-link" 
+                  [class.active]="scrollSpy.activeSection() === link.id"
+                  (click)="navigateToMobile(link.id)">
+                  <span class="nav-num">0{{ $index + 1 }}.</span>
+                  <span class="nav-label">{{ link.label }}</span>
+                </a>
+              }
+            </nav>
+          </div>
 
           <div class="drawer-footer">
-            <a class="btn btn-primary full-width" (click)="openResumeMobile()">
-              <app-icon name="file-text" [size]="18"></app-icon>
+            <a class="btn btn-primary full-width" href="Sarang_V_Resume.pdf.pdf" download="Sarang_V_Resume.pdf" target="_blank" (click)="closeMobileMenu()">
+              <app-icon name="download" [size]="18"></app-icon>
               <span>Download Resume</span>
             </a>
           </div>
@@ -240,7 +242,7 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
     .mobile-drawer {
       position: fixed;
       inset: 0;
-      z-index: 1001;
+      z-index: 99999;
       visibility: hidden;
       pointer-events: none;
       transition: visibility 0.3s ease;
@@ -262,8 +264,10 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
     .mobile-backdrop {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(4px);
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       opacity: 0;
       transition: opacity 0.3s ease;
     }
@@ -273,37 +277,49 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
       top: 0;
       right: 0;
       bottom: 0;
+      z-index: 2;
       width: 300px;
       max-width: 85vw;
-      background: var(--bg-secondary);
+      height: 100vh;
+      height: 100dvh;
+      background-color: var(--bg-card-solid);
       border-left: 1px solid var(--border-color);
       display: flex;
       flex-direction: column;
       padding: 1.5rem;
       transform: translateX(100%);
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: var(--shadow-md);
+      box-shadow: -10px 0 35px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
     }
 
     .drawer-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-bottom: 1.5rem;
+      padding-bottom: 1.25rem;
       border-bottom: 1px solid var(--border-color);
+      flex-shrink: 0;
 
       .logo-name {
         font-family: 'Outfit', sans-serif;
         font-weight: 700;
         font-size: 1.2rem;
+        color: var(--text-primary);
       }
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 1rem 0;
     }
 
     .mobile-nav-list {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      margin: 2rem 0;
     }
 
     .mobile-nav-link {
@@ -317,6 +333,7 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
       font-size: 1.05rem;
       font-weight: 500;
       transition: all 0.2s ease;
+      cursor: pointer;
 
       .nav-num {
         font-family: 'JetBrains Mono', monospace;
@@ -325,15 +342,16 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
       }
 
       &:hover, &.active {
-        background: rgba(0, 242, 254, 0.08);
+        background: rgba(0, 242, 254, 0.1);
         color: var(--accent-cyan);
       }
     }
 
     .drawer-footer {
-      margin-top: auto;
-      padding-top: 1.5rem;
+      flex-shrink: 0;
+      padding-top: 1.25rem;
       border-top: 1px solid var(--border-color);
+      margin-top: auto;
 
       .full-width {
         width: 100%;
@@ -381,14 +399,5 @@ export class NavbarComponent {
 
   public closeMobileMenu(): void {
     this.mobileMenuOpen.set(false);
-  }
-
-  public openResume(): void {
-    alert('Sarang V Resume: Full Stack Developer with 4+ years experience in Python, Django REST Framework, Angular, and PostgreSQL.');
-  }
-
-  public openResumeMobile(): void {
-    this.closeMobileMenu();
-    this.openResume();
   }
 }

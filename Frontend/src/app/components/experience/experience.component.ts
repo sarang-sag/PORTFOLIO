@@ -99,6 +99,13 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
             </div>
           }
         </div>
+
+        <div class="experience-cta">
+          <a href="Sarang_V_Resume.pdf.pdf" download="Sarang_V_Resume.pdf" target="_blank" class="btn btn-outline">
+            <app-icon name="download" [size]="18"></app-icon>
+            <span>Download Complete Resume (PDF)</span>
+          </a>
+        </div>
       </div>
     </section>
   `,
@@ -334,6 +341,12 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
+    }
+
+    .experience-cta {
+      display: flex;
+      justify-content: center;
+      margin-top: 3rem;
     }
   `]
 })

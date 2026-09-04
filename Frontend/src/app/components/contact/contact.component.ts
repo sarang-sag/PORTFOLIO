@@ -47,13 +47,23 @@ import { EmailService } from '../../core/services/email.service';
                 </div>
               </a>
 
-              <a href="https://github.com/sarang-sag" target="_blank" rel="noopener noreferrer" class="method-item">
+              <a href="https://github.com/sarang-sag?tab=repositories" target="_blank" rel="noopener noreferrer" class="method-item">
                 <div class="method-icon purple">
                   <app-icon name="github" [size]="20"></app-icon>
                 </div>
                 <div class="method-details">
                   <span class="method-label">GitHub</span>
                   <span class="method-value">Explore Code Repositories</span>
+                </div>
+              </a>
+
+              <a href="Sarang_V_Resume.pdf.pdf" download="Sarang_V_Resume.pdf" target="_blank" class="method-item">
+                <div class="method-icon amber">
+                  <app-icon name="download" [size]="20"></app-icon>
+                </div>
+                <div class="method-details">
+                  <span class="method-label">Curriculum Vitae</span>
+                  <span class="method-value">Download Resume (PDF)</span>
                 </div>
               </a>
             </div>
@@ -237,6 +247,7 @@ import { EmailService } from '../../core/services/email.service';
         &.cyan { background: rgba(0, 242, 254, 0.1); color: var(--accent-cyan); }
         &.blue { background: rgba(56, 189, 248, 0.1); color: #38bdf8; }
         &.purple { background: rgba(129, 140, 248, 0.1); color: var(--accent-purple); }
+        &.amber { background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); }
       }
 
       .method-details {

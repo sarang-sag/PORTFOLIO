@@ -54,6 +54,13 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
                   <span>Agile Team Collaboration & Clean Code</span>
                 </div>
               </div>
+
+              <div class="about-actions">
+                <a href="Sarang_V_Resume.pdf.pdf" download="Sarang_V_Resume.pdf" target="_blank" class="btn btn-primary">
+                  <app-icon name="download" [size]="18"></app-icon>
+                  <span>Download Full Resume (PDF)</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -167,6 +174,11 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
           color: var(--accent-purple);
         }
       }
+    }
+
+    .about-actions {
+      margin-top: 1.75rem;
+      display: flex;
     }
 
     .stats-grid {

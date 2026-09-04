@@ -46,23 +46,23 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
               <app-icon name="arrow-right" [size]="18"></app-icon>
             </button>
 
-            <button class="btn btn-outline" (click)="downloadResume()">
-              <app-icon name="file-text" [size]="18"></app-icon>
+            <a class="btn btn-outline" href="Sarang_V_Resume.pdf.pdf" download="Sarang_V_Resume.pdf" target="_blank">
+              <app-icon name="download" [size]="18"></app-icon>
               <span>Download Resume</span>
-            </button>
+            </a>
           </div>
 
           <!-- Social Links Bar -->
           <div class="hero-socials">
             <span class="social-label">Connect with me:</span>
             <div class="social-icons">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn Profile">
+              <a href="https://www.linkedin.com/in/sarang-v/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn Profile">
                 <app-icon name="linkedin" [size]="18"></app-icon>
               </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub Profile">
+              <a href="https://github.com/sarang-sag?tab=repositories" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub Profile">
                 <app-icon name="github" [size]="18"></app-icon>
               </a>
-              <a href="mailto:sarangv.dev@gmail.com" class="social-btn" aria-label="Send Email">
+              <a href="mailto:sarangsag86@gmail.com" class="social-btn" aria-label="Send Email">
                 <app-icon name="mail" [size]="18"></app-icon>
               </a>
             </div>
@@ -397,10 +397,6 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
 
   public scrollToProjects(): void {
     this.scrollSpy.scrollToSection('projects');
-  }
-
-  public downloadResume(): void {
-    alert('Downloading Sarang V Resume (Project Delivery Engineer / Full Stack Developer)');
   }
 
   private initBackgroundCanvas(): void {
