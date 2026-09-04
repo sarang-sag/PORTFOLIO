@@ -1,3 +1,24 @@
+<!-- High-End Branded Preloader Overlay -->
+@if (isLoading()) {
+  <div class="app-preloader-overlay" [class.fade-out]="isFadingOut()">
+    <div class="preloader-card">
+      <div class="preloader-logo">
+        <span class="code">&lt;</span>
+        <span class="name">Sarang</span>
+        <span class="dot">.V</span>
+        <span class="code"> /&gt;</span>
+      </div>
+      <div class="spinner-ring">
+        <div class="spinner-core"></div>
+      </div>
+      <div class="preloader-status">
+        <span class="status-pulse"></span>
+        <span>Loading Portfolio...</span>
+      </div>
+    </div>
+  </div>
+}
+
 <main class="portfolio-app-root">
   <!-- 1. Sticky Navigation Bar -->
   <app-navbar></app-navbar>

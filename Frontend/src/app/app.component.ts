@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject, signal, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { AboutComponent } from './components/about/about.component';
@@ -30,6 +30,32 @@ import { FooterComponent } from './components/footer/footer.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'Sarang V — Senior Full Stack Developer';
+export class AppComponent implements OnInit {
+  public title = 'Sarang V — Senior Full Stack Developer';
+  public isLoading = signal<boolean>(true);
+  public isFadingOut = signal<boolean>(false);
+  private platformId = inject(PLATFORM_ID);
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const hideLoader = () => {
+        this.isFadingOut.set(true);
+        setTimeout(() => {
+          this.isLoading.set(false);
+        }, 500);
+      };
+
+      if (document.readyState === 'complete') {
+        setTimeout(hideLoader, 300);
+      } else {
+        window.addEventListener('load', () => {
+          setTimeout(hideLoader, 200);
+        });
+        // Safety timeout
+        setTimeout(hideLoader, 1000);
+      }
+    } else {
+      this.isLoading.set(false);
+    }
+  }
 }

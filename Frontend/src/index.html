@@ -20,8 +20,65 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Instant Preloader Critical Head Styles -->
+  <style>
+    html, body {
+      background-color: #090d16 !important;
+      color: #f8fafc;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    .initial-preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #090d16;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 999999;
+    }
+    .initial-logo {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .initial-logo span {
+      color: #00f2fe;
+    }
+    .initial-spinner {
+      width: 46px;
+      height: 46px;
+      border: 3px solid rgba(0, 242, 254, 0.15);
+      border-top-color: #00f2fe;
+      border-radius: 50%;
+      animation: spinPreloader 0.8s linear infinite;
+    }
+    .initial-text {
+      margin-top: 1.25rem;
+      font-size: 0.875rem;
+      color: #94a3b8;
+      letter-spacing: 0.05em;
+    }
+    @keyframes spinPreloader {
+      to { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
-  <app-root></app-root>
+  <app-root>
+    <div class="initial-preloader">
+      <div class="initial-logo">&lt;Sarang<span>.V</span> /&gt;</div>
+      <div class="initial-spinner"></div>
+      <div class="initial-text">Loading Portfolio...</div>
+    </div>
+  </app-root>
 </body>
 </html>
